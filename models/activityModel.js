@@ -17,6 +17,15 @@ const Activity = {
             [email]
         );
         return rows;
+    },
+
+    async findBySkinTone(email_users, extracted_skin_tone) {
+        const connection = await db();
+        const [rows] = await connection.query(
+            'SELECT * FROM activities WHERE email_users = ? AND extracted_skin_tone = ?',
+            [email_users, extracted_skin_tone]
+        );
+        return rows;
     }
 };
 
