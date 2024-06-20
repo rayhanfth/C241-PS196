@@ -208,7 +208,7 @@ Base URL: http://35.219.99.255:5000
   - Response
     ```
     {
-    "msg": "Activity deleted successfully"
+      "msg": "Activity deleted successfully"
     }
     ```
 
