@@ -12,6 +12,12 @@ exports.saveActivity = async (req, res) => {
             return res.status(404).json({ msg: 'User not found' });
         }
 
+        const existingActivity = await Activity.findBySkinTone(user.email, extracted_skin_tone);
+
+        if (existingActivity.length > 0) {
+            return res.status(400).json({ msg: 'Activity with the same skin tone already exists' });
+        }
+
         await Activity.create(user.email, extracted_skin_tone, predicted_palette);
 
         res.status(201).json({ msg: 'Activity saved successfully' });
