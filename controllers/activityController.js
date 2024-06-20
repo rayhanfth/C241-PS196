@@ -49,3 +49,27 @@ exports.getActivities = async (req, res) => {
         res.status(500).json({ msg: 'Server error' });
     }
 };
+
+exports.deleteActivity = async (req, res) => {
+    const { id } = req.params;
+    const userId = req.user;
+
+    try {
+        const user = await User.findById(userId);
+
+        if (!user) {
+            return res.status(404).json({ msg: 'User not found' });
+        }
+
+        const result = await Activity.deleteById(id);
+
+        if (result === 0) {
+            return res.status(404).json({ msg: 'Activity not found' });
+        }
+
+        res.status(200).json({ msg: 'Activity deleted successfully' });
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).json({ msg: 'Server error' });
+    }
+};

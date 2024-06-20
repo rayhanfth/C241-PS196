@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const authRoutes = require('./routes/authRoutes');
 const resetPasswordRoutes = require('./routes/resetPasswordRoutes');
 const protectedRoutes = require('./routes/protectedRoutes');
+const cronJobs = require('./config/cronJobs');
 
 const app = express();
 

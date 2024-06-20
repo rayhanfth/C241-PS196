@@ -26,6 +26,15 @@ const Activity = {
             [email_users, extracted_skin_tone]
         );
         return rows;
+    },
+
+    async deleteById(id) {
+        const connection = await db();
+        const [result] = await connection.query(
+            'DELETE FROM activities WHERE id = ?',
+            [id]
+        );
+        return result.affectedRows;
     }
 };
 

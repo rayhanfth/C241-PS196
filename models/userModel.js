@@ -6,7 +6,7 @@ const User = {
     async create(name, email, password, verificationToken) {
         const connection = await db();
         const [result] = await connection.query(
-            'INSERT INTO users (name, email, password, verification_token) VALUES (?, ?, ?, ?)',
+            'INSERT INTO users (name, email, password, verification_token, created_at) VALUES (?, ?, ?, ?, NOW())',
             [name, email, password, verificationToken]
         );
         return result.insertId;
@@ -62,6 +62,13 @@ const User = {
         const [rows] = await connection.query('SELECT * FROM users WHERE id = ?', [id]);
         return rows[0];
     },
+
+    // Find unverified users
+    async findUnverifiedUsers() {
+        const connection = await db();
+        const [rows] = await connection.query('SELECT * FROM users WHERE is_verified = false');
+        return rows;
+    }
 };
 
 module.exports = User;
