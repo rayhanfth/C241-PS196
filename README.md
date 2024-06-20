@@ -195,6 +195,24 @@ Base URL: http://35.219.99.255:5000
       }
     ]
     ```
+- Delete Activities
+  - URL
+    - /api/activities/'id'
+    > Replace 'id' with activites id you want to delete
+  - Method
+    - DELETE
+  - Headers
+    - Key: Authorization
+    - Value: Bearer 'Token'
+    > Replace 'Token' with your login token
+  - Response
+    ```
+    {
+    "msg": "Activity deleted successfully"
+    }
+    ```
+
+    
 ## Model 1
 ### Predict Pallette
 - URL
