@@ -18,13 +18,32 @@ const validateEmail = (email) => {
 // Register endpoint
 const register = async (req, res) => {
     const { name, email, password } = req.body;
+    
+    // Validate name
+    if (!name) {
+        console.log('Error: Name is required');
+        return res.status(400).json({
+            status: 'error',
+            message: 'Name is required'
+        });
+    }
 
+    // Validate email
     const emailValidation = validateEmail(email);
     if (!emailValidation.isValid) {
         console.log(`Error: ${emailValidation.error} - Provided email: ${email}`);
         return res.status(400).json({
             status: 'error',
             message: emailValidation.error
+        });
+    }
+
+    // Validate password
+    if (!password || password.length < 8) {
+        console.log('Error: Password must be at least 8 characters');
+        return res.status(400).json({
+            status: 'error',
+            message: 'Password must be at least 8 characters'
         });
     }
 
